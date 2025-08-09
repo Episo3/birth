@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的日记本</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-book-open"></i> 日记本</h1>
+            <button id="newDiaryBtn" class="btn btn-primary">
+                <i class="fas fa-plus"></i> 写新日记
+            </button>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索日记...">
+                <i class="fas fa-search"></i>
+            </div>
+            <select id="categoryFilter" class="category-filter">
+                <option value="">所有标签</option>
+                <option value="简单日常">简单日常</option>
+                <option value="奇怪的话">奇怪的话</option>
+                <option value="杭州实习">杭州实习</option>
+                <option value="西藏之旅">西藏之旅</option>
+                <option value="怀化">怀化</option>
+                <option value="出去玩">出去玩</option>
+            </select>
+        </div>
+
+        <main class="main-content">
+            <div id="diaryList" class="diary-list">
+                <!-- 日记列表将在这里动态生成 -->
+            </div>
+        </main>
+    </div>
+
+    <!-- 新建/编辑日记的模态框 -->
+    <div id="diaryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">写新日记</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="diaryForm">
+                <div class="form-group">
+                    <label for="diaryTitle">标题</label>
+                    <input type="text" id="diaryTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="diaryTags">标签</label>
+                    <div class="tags-selector">
+                        <div class="tag-option">
+                            <input type="checkbox" id="tag-daily" name="tags" value="简单日常">
+                            <label for="tag-daily">简单日常</label>
+                        </div>
+                        <div class="tag-option">
+                            <input type="checkbox" id="tag-weird" name="tags" value="奇怪的话">
+                            <label for="tag-weird">奇怪的话</label>
+                        </div>
+                        <div class="tag-option">
+                            <input type="checkbox" id="tag-internship" name="tags" value="杭州实习">
+                            <label for="tag-internship">杭州实习</label>
+                        </div>
+                        <div class="tag-option">
+                            <input type="checkbox" id="tag-travel" name="tags" value="西藏之旅">
+                            <label for="tag-travel">西藏之旅</label>
+                        </div>
+                        <div class="tag-option">
+                            <input type="checkbox" id="tag-huaihua" name="tags" value="怀化">
+                            <label for="tag-huaihua">怀化</label>
+                        </div>
+                        <div class="tag-option">
+                            <input type="checkbox" id="tag-outing" name="tags" value="出去玩">
+                            <label for="tag-outing">出去玩</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="diaryContent">内容</label>
+                    <textarea id="diaryContent" rows="10" required placeholder="写下今天的故事..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="diaryMood">心情</label>
+                    <div class="mood-selector">
+                        <input type="radio" id="mood-happy" name="mood" value="😊">
+                        <label for="mood-happy">😊</label>
+                        <input type="radio" id="mood-sad" name="mood" value="😢">
+                        <label for="mood-sad">😢</label>
+                        <input type="radio" id="mood-angry" name="mood" value="😠">
+                        <label for="mood-angry">😠</label>
+                        <input type="radio" id="mood-excited" name="mood" value="🤩">
+                        <label for="mood-excited">🤩</label>
+                        <input type="radio" id="mood-calm" name="mood" value="😌">
+                        <label for="mood-calm">😌</label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancelBtn" class="btn btn-secondary">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 查看日记详情的模态框 -->
+    <div id="viewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="viewTitle"></h2>
+                <span class="close-view">&times;</span>
+            </div>
+            <div class="diary-details">
+                <div class="diary-meta">
+                    <div id="viewTags" class="tags-container"></div>
+                    <span id="viewDate" class="date"></span>
+                    <span id="viewMood" class="mood"></span>
+                </div>
+                <div id="viewContent" class="diary-content"></div>
+            </div>
+            <div class="modal-actions">
+                <button id="editBtn" class="btn btn-primary">编辑</button>
+                <button id="deleteBtn" class="btn btn-danger">删除</button>
+                <button id="closeViewBtn" class="btn btn-secondary">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
